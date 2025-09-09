@@ -1,12 +1,9 @@
 import TodoCard from './TodoCard';
 
-const TodoList = ({
-  todos,
-  selectedTab,
-  handleDeleteTodo,
-  handleCompleteTodo,
-}) => {
+const TodoList = (props) => {
+  const { todos, selectedTab } = props;
   // const tab = 'All';
+
   const filterTodosList =
     selectedTab === 'All'
       ? todos
@@ -16,16 +13,18 @@ const TodoList = ({
 
   return (
     <>
-      {/* {filterTodosList.map((todo, todoIndex) => { */}
-      {filterTodosList.map((todo) => {
+      {filterTodosList.map((todo, todoIndex) => {
+        // mapのidを使用すると，allのときとfilterのときでidが異なるため内容でフィルタする
+        const tempTodoIndex = todos.findIndex(
+          (val) => val.input === todo.input
+        );
+
         return (
           <TodoCard
-            // key={todoIndex}
-            key={todo.id}
-            // todoIndex={todoIndex}
+            key={todoIndex}
+            todoIndex={tempTodoIndex}
             todo={todo}
-            handleDeleteTodo={handleDeleteTodo}
-            handleCompleteTodo={handleCompleteTodo}
+            {...props}
           />
         );
       })}

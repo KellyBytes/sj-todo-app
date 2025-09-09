@@ -3,7 +3,6 @@ import Header from './components/Header';
 import Tabs from './components/Tabs';
 import TodoList from './components/TodoList';
 import TodoInput from './components/TodoInput';
-import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   // const todos = [
@@ -13,32 +12,38 @@ function App() {
   //   { input: 'Say hi to gran gran', complete: false },
   // ];
 
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([
+    { input: 'Hello! Add your first todo!', complete: true },
+  ]);
   const [selectedTab, setSelectedTab] = useState('Open');
 
   const handleAddTodo = (newTodo) => {
-    const newTodoList = [
-      ...todos,
-      { id: uuidv4(), input: newTodo, complete: false },
-    ];
+    const newTodoList = [...todos, { input: newTodo, complete: false }];
     setTodos(newTodoList);
     handleSaveData(newTodoList);
   };
 
   const handleCompleteTodo = (index) => {
-    // update/edit/modify
     let newTodoList = [...todos];
-    let completedTodo = todos.find((todo) => todo.id === index);
-    completedTodo['complete'] = !completedTodo['complete'];
+    let completedTodo = todos[index];
+    completedTodo['complete'] = true;
     newTodoList[index] = completedTodo;
     setTodos(newTodoList);
     handleSaveData(newTodoList);
   };
 
+  const handleEditTodo = (index) => {
+    // step 1 - create a duplicate array
+    // step 2 - create a new variable and assign the current value of the todo that needs editing to it
+    // step 3 - set the input value equal to the current value of the todo in question
+    // step 4 - copy the delete functionality and filter out the todo @ index from the duplicate array
+    // step 5 - set the todo state equal to the filtered duplicate array
+    // step 6 - now the user can edit the todo and re-add it when satisfied
+  };
+
   const handleDeleteTodo = (index) => {
-    // let newTodoList = todos.filter((_val, valIndex) => {
-    let newTodoList = todos.filter((todo) => {
-      return todo.id !== index; // 'index'以外を残す
+    let newTodoList = todos.filter((_val, valIndex) => {
+      return valIndex !== index; // 'index'以外を残す
     });
     setTodos(newTodoList);
     handleSaveData(newTodoList);

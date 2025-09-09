@@ -1,6 +1,5 @@
-import React from 'react';
-
-const Header = ({ todos }) => {
+const Header = (props) => {
+  const { todos } = props;
   const todosLength = todos.length;
 
   const isTasksPlural = todosLength != 1;

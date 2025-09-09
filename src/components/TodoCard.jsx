@@ -1,17 +1,14 @@
-const TodoCard = ({
-  todo,
-  // todoIndex,
-  handleDeleteTodo,
-  handleCompleteTodo,
-}) => {
+const TodoCard = (props) => {
+  const { todo, todoIndex, handleDeleteTodo, handleCompleteTodo } = props;
+
   return (
     <div className="card todo-item">
       <p>{todo.input}</p>
       <div className="todo-buttons">
         <button
-          // disabled={todo.complete}
+          disabled={todo.complete}
           onClick={() => {
-            handleCompleteTodo(todo.id);
+            handleCompleteTodo(todoIndex);
           }}
         >
           <h6>Done</h6>
