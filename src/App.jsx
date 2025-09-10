@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Tabs from './components/Tabs';
 import TodoList from './components/TodoList';
 import TodoInput from './components/TodoInput';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   // const todos = [
@@ -76,24 +77,26 @@ function App() {
 
   return (
     <>
-      <Header todos={todos} />
-      <div className="grid-container">
-        <Tabs
-          todos={todos}
-          selectedTab={selectedTab}
-          setSelectedTab={setSelectedTab}
-        />
-        <TodoList
-          todos={todos}
-          selectedTab={selectedTab}
-          handleDeleteTodo={handleDeleteTodo}
-          handleCompleteTodo={handleCompleteTodo}
-          handleEditTodo={handleEditTodo}
-          handleSaveEditTodo={handleSaveEditTodo}
-          handleCancelEditTodo={handleCancelEditTodo}
-        />
-        <TodoInput handleAddTodo={handleAddTodo} />
-      </div>
+      <ThemeProvider>
+        <Header todos={todos} />
+        <div className="grid-container">
+          <Tabs
+            todos={todos}
+            selectedTab={selectedTab}
+            setSelectedTab={setSelectedTab}
+          />
+          <TodoList
+            todos={todos}
+            selectedTab={selectedTab}
+            handleDeleteTodo={handleDeleteTodo}
+            handleCompleteTodo={handleCompleteTodo}
+            handleEditTodo={handleEditTodo}
+            handleSaveEditTodo={handleSaveEditTodo}
+            handleCancelEditTodo={handleCancelEditTodo}
+          />
+          <TodoInput handleAddTodo={handleAddTodo} />
+        </div>
+      </ThemeProvider>
     </>
   );
 }
