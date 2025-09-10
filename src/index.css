@@ -37,9 +37,20 @@ h1 {
   margin-bottom: 1rem;
 }
 
+/* .mode-icons {
+  display: flex;
+  gap: 1rem;
+} */
+
 .mode-icon {
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
+  padding: 0.5rem 0.3rem;
+  opacity: 0.6;
+}
+
+.divider {
+  font-size: 1rem;
   opacity: 0.6;
 }
 
@@ -218,7 +229,7 @@ h1 {
     grid-template-areas:
       "tab todos"
       "tab input";
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 160px 1fr;
     grid-template-rows: min-content;
     column-gap: 2rem;
   }
@@ -230,7 +241,7 @@ h1 {
   .tab-container {
     grid-area: tab;
     height: 100%;
-    min-width: 10rem;
+    min-width: 11rem;
     flex-direction: column;
     justify-content: flex-start;
   }
