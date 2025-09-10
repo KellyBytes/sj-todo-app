@@ -13,12 +13,15 @@ function App() {
   // ];
 
   const [todos, setTodos] = useState([
-    { input: 'Hello! Add your first todo!', complete: true },
+    { input: 'Hello! Add your first todo!', complete: true, editing: false },
   ]);
   const [selectedTab, setSelectedTab] = useState('Open');
 
-  const handleAddTodo = (newTodo) => {
-    const newTodoList = [...todos, { input: newTodo, complete: false }];
+  const handleAddTodo = (content) => {
+    const newTodoList = [
+      ...todos,
+      { input: content, complete: false, editing: false },
+    ];
     setTodos(newTodoList);
     handleSaveData(newTodoList);
   };
@@ -26,19 +29,30 @@ function App() {
   const handleCompleteTodo = (index) => {
     let newTodoList = [...todos];
     let completedTodo = todos[index];
-    completedTodo['complete'] = true;
+    completedTodo['complete'] = !completedTodo['complete'];
     newTodoList[index] = completedTodo;
     setTodos(newTodoList);
     handleSaveData(newTodoList);
   };
 
   const handleEditTodo = (index) => {
-    // step 1 - create a duplicate array
-    // step 2 - create a new variable and assign the current value of the todo that needs editing to it
-    // step 3 - set the input value equal to the current value of the todo in question
-    // step 4 - copy the delete functionality and filter out the todo @ index from the duplicate array
-    // step 5 - set the todo state equal to the filtered duplicate array
-    // step 6 - now the user can edit the todo and re-add it when satisfied
+    let newTodoList = [...todos];
+    newTodoList[index].editing = true;
+    setTodos(newTodoList);
+  };
+
+  const handleSaveEditTodo = (index, newContent) => {
+    let newTodoList = [...todos];
+    newTodoList[index].input = newContent;
+    newTodoList[index].editing = false;
+    setTodos(newTodoList);
+    handleSaveData(newTodoList);
+  };
+
+  const handleCancelEditTodo = (index) => {
+    let newTodoList = [...todos];
+    newTodoList[index].editing = false;
+    setTodos(newTodoList);
   };
 
   const handleDeleteTodo = (index) => {
@@ -63,18 +77,23 @@ function App() {
   return (
     <>
       <Header todos={todos} />
-      <Tabs
-        todos={todos}
-        selectedTab={selectedTab}
-        setSelectedTab={setSelectedTab}
-      />
-      <TodoList
-        todos={todos}
-        selectedTab={selectedTab}
-        handleDeleteTodo={handleDeleteTodo}
-        handleCompleteTodo={handleCompleteTodo}
-      />
-      <TodoInput handleAddTodo={handleAddTodo} />
+      <div className="grid-container">
+        <Tabs
+          todos={todos}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
+        <TodoList
+          todos={todos}
+          selectedTab={selectedTab}
+          handleDeleteTodo={handleDeleteTodo}
+          handleCompleteTodo={handleCompleteTodo}
+          handleEditTodo={handleEditTodo}
+          handleSaveEditTodo={handleSaveEditTodo}
+          handleCancelEditTodo={handleCancelEditTodo}
+        />
+        <TodoInput handleAddTodo={handleAddTodo} />
+      </div>
     </>
   );
 }

@@ -12,7 +12,11 @@ const TodoList = (props) => {
       : todos.filter((val) => !val.complete);
 
   return (
-    <>
+    <div
+      className={`todo-container ${
+        filterTodosList.length === 0 ? 'empty' : ''
+      }`}
+    >
       {filterTodosList.map((todo, todoIndex) => {
         // mapのidを使用すると，allのときとfilterのときでidが異なるため内容でフィルタする
         const tempTodoIndex = todos.findIndex(
@@ -28,7 +32,7 @@ const TodoList = (props) => {
           />
         );
       })}
-    </>
+    </div>
   );
 };
 

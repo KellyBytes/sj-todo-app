@@ -11,7 +11,6 @@ const Tabs = (props) => {
             : tab === 'Open'
             ? todos.filter((val) => !val.complete).length
             : todos.filter((val) => val.complete).length;
-
         return (
           <button
             onClick={() => setSelectedTab(tab)}
@@ -26,7 +25,7 @@ const Tabs = (props) => {
           </button>
         );
       })}
-      <hr />
+      {/* <hr /> */}
     </nav>
   );
 };
