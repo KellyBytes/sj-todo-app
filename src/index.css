@@ -134,6 +134,7 @@ h1 {
 
 .todo-content {
   display: flex;
+  margin-bottom: 0.5rem;
 }
 
 .todo-content p {
@@ -311,6 +312,7 @@ h1 {
 
   .todo-content {
     flex: 1;
+    margin-bottom: 0;
   }
 
   .todo-grid {

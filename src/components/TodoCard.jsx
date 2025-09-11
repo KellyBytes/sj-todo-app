@@ -56,13 +56,15 @@ const TodoCard = (props) => {
         </>
       ) : (
         <>
-          <p
-            onClick={() => {
-              handleEditTodo(todoIndex);
-            }}
-          >
-            {todo.input}
-          </p>
+          <div className="todo-content">
+            <p
+              onClick={() => {
+                handleEditTodo(todoIndex);
+              }}
+            >
+              {todo.input}
+            </p>
+          </div>
           <div className="todo-grid">
             <div className="todo-buttons">
               <button
