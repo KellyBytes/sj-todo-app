@@ -14,14 +14,19 @@ function App() {
   // ];
 
   const [todos, setTodos] = useState([
-    { input: 'Hello! Add your first todo!', complete: true, editing: false },
+    {
+      input: 'Hello! Add your first todo!',
+      due: '',
+      complete: true,
+      editing: false,
+    },
   ]);
   const [selectedTab, setSelectedTab] = useState('Open');
 
-  const handleAddTodo = (content) => {
+  const handleAddTodo = (todo) => {
     const newTodoList = [
       ...todos,
-      { input: content, complete: false, editing: false },
+      { input: todo.input, due: todo.due, complete: false, editing: false },
     ];
     setTodos(newTodoList);
     handleSaveData(newTodoList);
@@ -42,9 +47,10 @@ function App() {
     setTodos(newTodoList);
   };
 
-  const handleSaveEditTodo = (index, newContent) => {
+  const handleSaveEditTodo = (index, newContent, newDue) => {
     let newTodoList = [...todos];
     newTodoList[index].input = newContent;
+    newTodoList[index].due = newDue;
     newTodoList[index].editing = false;
     setTodos(newTodoList);
     handleSaveData(newTodoList);

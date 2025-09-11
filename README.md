@@ -4,7 +4,7 @@ Code along with [jamezmca](https://github.com/jamezmca)
 
 ## Features
 
-- Add tasks
+- Add tasks with/without due dates
 - Filter tasks by All/Open/Completed
 - Change the status of tasks with Done button
 - Delete tasks with Delete button
@@ -24,14 +24,14 @@ Code along with [jamezmca](https://github.com/jamezmca)
 Light Mode
 
 <p>
-  <img src="./public/images/todo-app-light-sm.png" height="300" style="margin-right: 10px;"/>
-  <img src="./public/images/todo-app-light-lg.png" height="300" style="margin-right: 10px;"/>  
+  <img src="./public/images/todo-app-light-sm-2.png" height="300" style="margin-right: 5px;"/>
+  <img src="./public/images/todo-app-light-lg-2.png" height="300" style="margin-right: 5px;"/>  
 </p>
 <br />
 
 Dark Mode
 
 <p>
-  <img src="./public/images/todo-app-dark-sm-2.png" height="300" style="margin-right: 10px;"/>
-  <img src="./public/images/todo-app-dark-lg-2.png" height="300" style="margin-right: 10px;"/>
+  <img src="./public/images/todo-app-dark-sm-3.png" height="300" style="margin-right: 5px;"/>
+  <img src="./public/images/todo-app-dark-lg-3.png" height="300" style="margin-right: 5px;"/>
 </p>

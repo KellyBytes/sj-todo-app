@@ -1,5 +1,5 @@
 #root {
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -88,6 +88,9 @@ h1 {
   cursor: pointer;
 }
 
+.tab-button h4 {
+  font-size: clamp(0.75rem, 3.5vw, 1.125rem);
+}
 .tab-button span {
   opacity: 0.4;
   font-weight: 400;
@@ -129,6 +132,10 @@ h1 {
   border: none;
 }
 
+.todo-item p {
+  margin-bottom: 0.5rem;
+}
+
 .todo-complete {
   position: relative;
 }
@@ -143,9 +150,21 @@ h1 {
   opacity: 0.6;
 }
 
+.todo-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-grid span {
+  font-size: clamp(0.6rem, 2.5vw, 0.875rem);
+  color: #888;
+  margin-right: -0.4rem;
+  align-self: end;
+}
+
 .todo-buttons {
   display: flex;
-  gap: 1rem;
+  gap: clamp(0.5rem, 2.5vw, 0.875rem);
   position: relative;
   z-index: 5;
 }
@@ -186,19 +205,17 @@ h1 {
   font-weight: normal;
 }
 
-.todo-item p {
-  flex: 1;
-  font-weight: normal;
+.todo-buttons span {
+  padding-left: auto;
 }
 
 .input-container {
   display: flex;
   align-items: start;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .input-container input {
-  width: 100%;
   flex: 1;
   max-width: unset !important;
   height: 60px;
@@ -206,9 +223,15 @@ h1 {
   font-size: 16px;
 }
 
+.input-container input:nth-child(2) {
+  flex: 0;
+  width: 3.5rem;
+  cursor: pointer;
+}
+
 .input-container button {
   height: 60px;
-  width: 100px;
+  width: 3.5rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -227,7 +250,7 @@ h1 {
   }
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   h1 {
     margin-bottom: 1rem;
   }
@@ -276,6 +299,27 @@ h1 {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+  }
+
+  .todo-item input:nth-child(2) {
+    flex: 0;
+    width: 3rem;
+    cursor: pointer;
+  }
+
+  .todo-grid {
+    display: grid;
+    grid-template-areas: "date buttons";
+    grid-template-columns: 1fr 2fr;
+    column-gap: 0.5rem;
+  }
+
+  .todo-buttons {
+    grid-area: buttons;
+  }
+
+  .todo-grid span {
+    grid-area: date;
   }
 
   .input-container {
