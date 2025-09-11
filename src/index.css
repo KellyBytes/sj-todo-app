@@ -44,7 +44,7 @@ h1 {
 }
 
 .mode-icons i {
-  font-size: clamp(0.875rem, 2.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
   padding-left: 0.6rem;
   opacity: 0.6;
   cursor: pointer;
@@ -221,13 +221,27 @@ h1 {
   height: 60px;
   padding: 0 1rem;
   font-size: 16px;
+  position: relative;
 }
+
+/* .input-container input[type="date"]::-webkit-datetime-edit-text,
+.input-container input[type="date"]::-webkit-datetime-edit-year-field,
+.input-container input[type="date"]::-webkit-datetime-edit-month-field,
+.input-container input[type="date"]::-webkit-datetime-edit-day-field {
+  color: transparent;
+}
+
+.input-container input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 1rem;
+} 
 
 .input-container input:nth-child(2) {
   flex: 0;
   width: 3.5rem;
+  color: #888;
   cursor: pointer;
-}
+} */
 
 .input-container button {
   height: 60px;
