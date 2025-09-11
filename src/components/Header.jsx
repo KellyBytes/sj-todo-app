@@ -16,9 +16,8 @@ const Header = (props) => {
             className={`mode-icon bx bx-${theme === 'dark' ? 'sun' : 'moon'}`}
             onClick={toggleDarkMode}
           ></i>
-          <i className="divider bx bx-dots-vertical"></i>
           <i
-            className={`mode-icon bx bx-laptop`}
+            className="mode-icon bx bx-laptop"
             onClick={() => setTheme('system')}
           ></i>
         </div>

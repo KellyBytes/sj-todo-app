@@ -37,21 +37,28 @@ h1 {
   margin-bottom: 1rem;
 }
 
-/* .mode-icons {
+.mode-icons {
   display: flex;
-  gap: 1rem;
-} */
-
-.mode-icon {
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 0.5rem 0.3rem;
-  opacity: 0.6;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
 }
 
-.divider {
-  font-size: 1rem;
+.mode-icons i {
+  font-size: clamp(0.875rem, 2.5vw, 1.5rem);
+  padding-left: 0.6rem;
   opacity: 0.6;
+  cursor: pointer;
+  position: relative;
+}
+
+.mode-icons i + i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background-color: #888;
 }
 
 .text-gradient {
@@ -196,6 +203,7 @@ h1 {
   max-width: unset !important;
   height: 60px;
   padding: 0 1rem;
+  font-size: 16px;
 }
 
 .input-container button {
