@@ -17,6 +17,7 @@ Code along with [jamezmca](https://github.com/jamezmca)
 
 - Add `editing` key in todos and editValue state to edit tasks
 - Use `useContext` to implement theme switchers
+- Add `react-datepicker`
 - ~~Implement uuid to identify tasks~~
 
 ## Images

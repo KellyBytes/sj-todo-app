@@ -132,8 +132,17 @@ h1 {
   border: none;
 }
 
-.todo-item p {
+.todo-content {
+  display: flex;
+}
+
+.todo-content p {
   margin-bottom: 0.5rem;
+}
+
+.todo-content button {
+  height: 2.5rem;
+  margin-left: 0.5rem;
 }
 
 .todo-complete {
@@ -224,30 +233,15 @@ h1 {
   position: relative;
 }
 
-/* .input-container input[type="date"]::-webkit-datetime-edit-text,
-.input-container input[type="date"]::-webkit-datetime-edit-year-field,
-.input-container input[type="date"]::-webkit-datetime-edit-month-field,
-.input-container input[type="date"]::-webkit-datetime-edit-day-field {
-  color: transparent;
-}
-
-.input-container input[type="date"]::-webkit-calendar-picker-indicator {
-  position: absolute;
-  right: 1rem;
-} 
-
-.input-container input:nth-child(2) {
-  flex: 0;
-  width: 3.5rem;
-  color: #888;
-  cursor: pointer;
-} */
-
 .input-container button {
   height: 60px;
   width: 3.5rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.react-datepicker-popper {
+  z-index: 1000;
 }
 
 @keyframes widen {
@@ -315,10 +309,8 @@ h1 {
     gap: 1rem;
   }
 
-  .todo-item input:nth-child(2) {
-    flex: 0;
-    width: 3rem;
-    cursor: pointer;
+  .todo-content {
+    flex: 1;
   }
 
   .todo-grid {

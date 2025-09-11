@@ -1,19 +1,18 @@
-import { useState, useRef } from 'react';
+import React, { useState, forwardRef } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const TodoInput = (props) => {
-  const { handleAddTodo } = props;
+const CalendarButton = forwardRef(({ value, onClick }, ref) => (
+  <button type="button" onClick={onClick} ref={ref} aria-label="Pick date">
+    <i className="fa-regular fa-calendar" />
+  </button>
+));
+
+const TodoInput = ({ handleAddTodo }) => {
   const [inputValue, setInputValue] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const hiddenInputRef = useRef(null);
-
-  const handleOpenDatePicker = () => {
-    if (hiddenInputRef.current) {
-      hiddenInputRef.current.showPicker();
-    }
-  };
+  const [dueDate, setDueDate] = useState(null);
 
   return (
-    // <div className="input-container">
     <form
       className="input-container"
       onSubmit={(e) => {
@@ -21,10 +20,10 @@ const TodoInput = (props) => {
         if (!inputValue) return;
         handleAddTodo({
           input: inputValue,
-          due: dueDate || '',
+          due: dueDate ? dueDate.toISOString().slice(0, 10) : '',
         });
         setInputValue('');
-        setDueDate('');
+        setDueDate(null);
       }}
     >
       <input
@@ -33,20 +32,16 @@ const TodoInput = (props) => {
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Add task"
       />
-      <button type="button" onClick={handleOpenDatePicker}>
-        <i className="fa-regular fa-calendar"></i>
-      </button>
-      <input
-        type="date"
-        ref={hiddenInputRef}
-        style={{ display: 'none' }}
-        onChange={(e) => setDueDate(e.target.value)}
+      <DatePicker
+        selected={dueDate}
+        onChange={(date) => setDueDate(date)}
+        customInput={<CalendarButton />}
+        popperPlacement="bottom-start"
       />
       <button type="submit">
         <i className="fa-solid fa-plus"></i>
       </button>
     </form>
-    // </div>
   );
 };
 

@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const TodoCard = (props) => {
   const {
@@ -13,20 +15,34 @@ const TodoCard = (props) => {
   const [editValue, setEditValue] = useState(todo.input);
   const [editDue, setEditDue] = useState(todo.due);
 
+  const CalendarButton = forwardRef(({ value, onClick }, ref) => (
+    <button type="button" onClick={onClick} ref={ref} aria-label="Pick date">
+      <i className="fa-regular fa-calendar" />
+    </button>
+  ));
+
   return (
     <div className="card todo-item">
       {todo.editing ? (
         <>
-          <input
-            type="text"
-            value={editValue}
-            onChange={(e) => setEditValue(e.target.value)}
-          />
-          <input
-            type="date"
-            value={editDue}
-            onChange={(e) => setEditDue(e.target.value)}
-          />
+          <div className="todo-content">
+            <input
+              type="text"
+              value={editValue}
+              onChange={(e) => setEditValue(e.target.value)}
+            />
+            {/* <input
+              type="date"
+              value={editDue}
+              onChange={(e) => setEditDue(e.target.value)}
+            /> */}
+            <DatePicker
+              selected={editDue}
+              onChange={(date) => setEditDue(date.toISOString().slice(0, 10))}
+              customInput={<CalendarButton />}
+              popperPlacement="bottom-start"
+            />
+          </div>
           <div className="todo-buttons">
             <button
               onClick={() => handleSaveEditTodo(todoIndex, editValue, editDue)}
