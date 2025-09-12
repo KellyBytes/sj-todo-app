@@ -3,9 +3,10 @@ const Tabs = (props) => {
   const tabs = ['All', 'Open', 'Completed'];
 
   return (
-    <nav className="tab-container sort-button">
-      <button className="tab-button" onClick={toggleSort}>
+    <nav className="tab-container">
+      <button className="tab-button sort-button" onClick={toggleSort}>
         <i className="fa-solid fa-sort"></i>
+        <span className="sort-button-text">Sort by Due</span>
       </button>
       {tabs.map((tab, tabIndex) => {
         const numOfTasks =
