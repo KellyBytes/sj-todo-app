@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Tabs from './components/Tabs';
 import TodoList from './components/TodoList';
 import TodoInput from './components/TodoInput';
-import { ThemeProvider } from './context/ThemeContext';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   // const todos = [
@@ -22,50 +23,83 @@ function App() {
     },
   ]);
   const [selectedTab, setSelectedTab] = useState('Open');
+  const [ascendingSort, setAscendingSort] = useState(true);
 
   const handleAddTodo = (todo) => {
-    const newTodoList = [
+    let newTodoList = [
       ...todos,
-      { input: todo.input, due: todo.due, complete: false, editing: false },
+      {
+        id: uuidv4(),
+        input: todo.input,
+        due: todo.due,
+        complete: false,
+        editing: false,
+      },
     ];
+    newTodoList = sortTodosByDue(newTodoList, ascendingSort);
     setTodos(newTodoList);
     handleSaveData(newTodoList);
   };
 
-  const handleCompleteTodo = (index) => {
-    let newTodoList = [...todos];
-    let completedTodo = todos[index];
-    completedTodo['complete'] = !completedTodo['complete'];
-    newTodoList[index] = completedTodo;
-    setTodos(newTodoList);
-    handleSaveData(newTodoList);
-  };
-
-  const handleEditTodo = (index) => {
-    let newTodoList = [...todos];
-    newTodoList[index].editing = true;
-    setTodos(newTodoList);
-  };
-
-  const handleSaveEditTodo = (index, newContent, newDue) => {
-    let newTodoList = [...todos];
-    newTodoList[index].input = newContent;
-    newTodoList[index].due = newDue;
-    newTodoList[index].editing = false;
-    setTodos(newTodoList);
-    handleSaveData(newTodoList);
-  };
-
-  const handleCancelEditTodo = (index) => {
-    let newTodoList = [...todos];
-    newTodoList[index].editing = false;
-    setTodos(newTodoList);
-  };
-
-  const handleDeleteTodo = (index) => {
-    let newTodoList = todos.filter((_val, valIndex) => {
-      return valIndex !== index; // 'index'以外を残す
+  const sortTodosByDue = (todoList, ascendingSort = true) => {
+    return [...todoList].sort((a, b) => {
+      if (!a.due) {
+        return ascendingSort ? -1 : 1;
+      }
+      if (!b.due) {
+        return ascendingSort ? 1 : -1;
+      }
+      return new Date(a.due) - new Date(b.due);
     });
+  };
+
+  const toggleSort = () => {
+    setAscendingSort((prev) => {
+      const newSort = !prev;
+      let newTodoList = sortTodosByDue(todos, newSort);
+
+      setTodos(newTodoList);
+      handleSaveData(newTodoList);
+
+      return newSort;
+    });
+  };
+
+  const handleCompleteTodo = (id) => {
+    let newTodoList = todos.map((todo) =>
+      todo.id === id ? { ...todo, complete: !todo.complete } : todo
+    );
+    setTodos(newTodoList);
+    handleSaveData(newTodoList);
+  };
+
+  const handleEditTodo = (id) => {
+    let newTodoList = todos.map((todo) =>
+      todo.id === id ? { ...todo, editing: true } : todo
+    );
+    setTodos(newTodoList);
+  };
+
+  const handleSaveEditTodo = (id, newContent, newDue) => {
+    let newTodoList = todos.map((todo) =>
+      todo.id === id
+        ? { ...todo, input: newContent, due: newDue, editing: false }
+        : todo
+    );
+    newTodoList = sortTodosByDue(newTodoList, ascendingSort);
+    setTodos(newTodoList);
+    handleSaveData(newTodoList);
+  };
+
+  const handleCancelEditTodo = (id) => {
+    let newTodoList = todos.map((todo) =>
+      todo.id === id ? { ...todo, editing: false } : todo
+    );
+    setTodos(newTodoList);
+  };
+
+  const handleDeleteTodo = (id) => {
+    let newTodoList = todos.filter((todo) => todo.id !== id);
     setTodos(newTodoList);
     handleSaveData(newTodoList);
   };
@@ -77,7 +111,20 @@ function App() {
   useEffect(() => {
     if (!localStorage || !localStorage.getItem('todo-app')) return;
     let db = JSON.parse(localStorage.getItem('todo-app'));
-    setTodos(db.todos);
+
+    let updatedTodos = db.todos.map((todo) => {
+      if (!todo.id) {
+        return { ...todo, id: uuidv4() };
+      }
+      return todo;
+    });
+
+    localStorage.setItem(
+      'todo-app',
+      JSON.stringify({ ...db, todos: updatedTodos })
+    );
+
+    setTodos(updatedTodos);
   }, []);
 
   return (
@@ -89,6 +136,7 @@ function App() {
             todos={todos}
             selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}
+            toggleSort={toggleSort}
           />
           <TodoList
             todos={todos}

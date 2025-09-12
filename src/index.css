@@ -89,7 +89,8 @@ h1 {
 }
 
 .tab-button h4 {
-  font-size: clamp(0.75rem, 3.5vw, 1.125rem);
+  font-size: clamp(0.7rem, 3.5vw, 1.125rem);
+  text-wrap: nowrap;
 }
 .tab-button span {
   opacity: 0.4;
@@ -115,6 +116,12 @@ h1 {
   animation: widen 250ms ease-in-out forwards;
 }
 
+.sort-button i {
+  width: 2rem;
+  font-size: clamp(0.75rem, 3.5vw, 1.125rem);
+  padding-top: 0.4rem;
+}
+
 .todo-container {
   min-width: 100%;
   margin-bottom: 1rem;
@@ -134,11 +141,11 @@ h1 {
 
 .todo-content {
   display: flex;
-  margin-bottom: 0.5rem;
 }
 
 .todo-content p {
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 .todo-content button {
@@ -166,10 +173,11 @@ h1 {
 }
 
 .todo-grid span {
-  font-size: clamp(0.6rem, 2.5vw, 0.875rem);
+  font-size: clamp(0.7rem, 2.5vw, 0.875rem);
   color: #888;
   margin-right: -0.4rem;
   align-self: end;
+  cursor: pointer;
 }
 
 .todo-buttons {
@@ -297,6 +305,11 @@ h1 {
     justify-content: flex-end;
   }
 
+  .sort-button i {
+    width: 2rem;
+    font-size: clamp(0.75rem, 3.5vw, 1.125rem);
+  }
+
   .todo-container {
     grid-area: todos;
     height: auto;
@@ -312,7 +325,6 @@ h1 {
 
   .todo-content {
     flex: 1;
-    margin-bottom: 0;
   }
 
   .todo-grid {

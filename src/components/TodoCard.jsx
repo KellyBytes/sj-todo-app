@@ -5,7 +5,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 const TodoCard = (props) => {
   const {
     todo,
-    todoIndex,
     handleDeleteTodo,
     handleCompleteTodo,
     handleEditTodo,
@@ -31,11 +30,6 @@ const TodoCard = (props) => {
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
             />
-            {/* <input
-              type="date"
-              value={editDue}
-              onChange={(e) => setEditDue(e.target.value)}
-            /> */}
             <DatePicker
               selected={editDue}
               onChange={(date) => setEditDue(date.toISOString().slice(0, 10))}
@@ -45,11 +39,11 @@ const TodoCard = (props) => {
           </div>
           <div className="todo-buttons">
             <button
-              onClick={() => handleSaveEditTodo(todoIndex, editValue, editDue)}
+              onClick={() => handleSaveEditTodo(todo.id, editValue, editDue)}
             >
               <h6>Save</h6>
             </button>
-            <button onClick={() => handleCancelEditTodo(todoIndex)}>
+            <button onClick={() => handleCancelEditTodo(todo.id)}>
               <h6>Cancel</h6>
             </button>
           </div>
@@ -59,7 +53,7 @@ const TodoCard = (props) => {
           <div className="todo-content">
             <p
               onClick={() => {
-                handleEditTodo(todoIndex);
+                handleEditTodo(todo.id);
               }}
             >
               {todo.input}
@@ -71,20 +65,26 @@ const TodoCard = (props) => {
                 // disabled={todo.complete}
                 className={todo.complete ? 'completed' : ''}
                 onClick={() => {
-                  handleCompleteTodo(todoIndex);
+                  handleCompleteTodo(todo.id);
                 }}
               >
                 <h6>{todo.complete ? 'Reopen' : 'Done'}</h6>
               </button>
               <button
                 onClick={() => {
-                  handleDeleteTodo(todoIndex);
+                  handleDeleteTodo(todo.id);
                 }}
               >
                 <h6>Delete</h6>
               </button>
             </div>
-            <span>{todo.due}</span>
+            <span
+              onClick={() => {
+                handleEditTodo(todo.id);
+              }}
+            >
+              {todo.due}
+            </span>
           </div>
         </>
       )}

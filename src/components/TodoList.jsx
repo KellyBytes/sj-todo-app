@@ -17,21 +17,9 @@ const TodoList = (props) => {
         filterTodosList.length === 0 ? 'empty' : ''
       }`}
     >
-      {filterTodosList.map((todo, todoIndex) => {
-        // mapのidを使用すると，allのときとfilterのときでidが異なるため内容でフィルタする
-        const tempTodoIndex = todos.findIndex(
-          (val) => val.input === todo.input
-        );
-
-        return (
-          <TodoCard
-            key={todoIndex}
-            todoIndex={tempTodoIndex}
-            todo={todo}
-            {...props}
-          />
-        );
-      })}
+      {filterTodosList.map((todo) => (
+        <TodoCard key={todo.id} todo={todo} {...props} />
+      ))}
     </div>
   );
 };

@@ -1,9 +1,12 @@
 const Tabs = (props) => {
-  const { todos, selectedTab, setSelectedTab } = props;
+  const { todos, selectedTab, setSelectedTab, toggleSort } = props;
   const tabs = ['All', 'Open', 'Completed'];
 
   return (
-    <nav className="tab-container">
+    <nav className="tab-container sort-button">
+      <button className="tab-button" onClick={toggleSort}>
+        <i className="fa-solid fa-sort"></i>
+      </button>
       {tabs.map((tab, tabIndex) => {
         const numOfTasks =
           tab === 'All'
