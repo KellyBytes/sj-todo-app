@@ -139,18 +139,19 @@ h1 {
   border: none;
 }
 
-.todo-content {
-  display: flex;
+.todo-item p {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
 }
 
-.todo-content p {
+.todo-content {
+  display: flex;
   margin-bottom: 0.5rem;
-  cursor: pointer;
 }
 
 .todo-content button {
   height: 2.5rem;
-  margin-left: 0.5rem;
+  margin-left: 1rem;
 }
 
 .todo-complete {
@@ -178,6 +179,14 @@ h1 {
   margin-right: -0.4rem;
   align-self: end;
   cursor: pointer;
+}
+
+.todo-grid span.today {
+  color: #00a32a;
+}
+
+.todo-grid span.overdue {
+  color: red;
 }
 
 .todo-buttons {
@@ -223,10 +232,6 @@ h1 {
   font-weight: normal;
 }
 
-.todo-buttons span {
-  padding-left: auto;
-}
-
 .input-container {
   display: flex;
   align-items: start;
@@ -251,6 +256,10 @@ h1 {
 
 .react-datepicker-popper {
   z-index: 1000;
+}
+
+button .react-datepicker__navigation {
+  border: none;
 }
 
 @keyframes widen {
@@ -317,15 +326,33 @@ h1 {
   }
 
   .todo-item {
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+  }
+
+  .ref {
+    width: 100%;
+  }
+
+  .todo-item p {
+    margin-bottom: 0;
   }
 
   .todo-content {
-    flex: 1;
+    display: flex;
+    justify-content: space-between;
   }
+
+  .todo-content input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* .todo-content .react-datepicker-wrapper {
+    flex-grow: 0;
+  } */
 
   .todo-grid {
     display: grid;

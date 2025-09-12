@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -14,16 +14,54 @@ const TodoCard = (props) => {
   const [editValue, setEditValue] = useState(todo.input);
   const [editDue, setEditDue] = useState(todo.due);
 
+  // wrap editing area with ref
+  const editRef = useRef(null);
+
   const CalendarButton = forwardRef(({ value, onClick }, ref) => (
     <button type="button" onClick={onClick} ref={ref} aria-label="Pick date">
       <i className="fa-regular fa-calendar" />
     </button>
   ));
 
+  const isOverDue = (due) => {
+    if (!due) return false;
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    if (due === today) {
+      return 'today';
+    } else if (due < today) {
+      return 'overdue';
+    } else {
+      return '';
+    }
+    // return due <= today;
+  };
+
+  // detect click outside
+  useEffect(() => {
+    if (!todo.editing) return;
+
+    const handleClickOutside = (e) => {
+      if (editRef.current && !editRef.current.contains(e.target)) {
+        // cancel except Save button
+        if (!e.target.closest('.save-btn')) {
+          handleCancelEditTodo(todo.id);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [todo.editing, todo.id, handleCancelEditTodo]);
+
   return (
     <div className="card todo-item">
       {todo.editing ? (
-        <>
+        <div className="ref" ref={editRef}>
           <div className="todo-content">
             <input
               type="text"
@@ -39,26 +77,25 @@ const TodoCard = (props) => {
           </div>
           <div className="todo-buttons">
             <button
+              className="save-btn"
               onClick={() => handleSaveEditTodo(todo.id, editValue, editDue)}
             >
               <h6>Save</h6>
             </button>
-            <button onClick={() => handleCancelEditTodo(todo.id)}>
+            {/* <button onClick={() => handleCancelEditTodo(todo.id)}>
               <h6>Cancel</h6>
-            </button>
+            </button> */}
           </div>
-        </>
+        </div>
       ) : (
         <>
-          <div className="todo-content">
-            <p
-              onClick={() => {
-                handleEditTodo(todo.id);
-              }}
-            >
-              {todo.input}
-            </p>
-          </div>
+          <p
+            onClick={() => {
+              handleEditTodo(todo.id);
+            }}
+          >
+            {todo.input}
+          </p>
           <div className="todo-grid">
             <div className="todo-buttons">
               <button
@@ -79,6 +116,7 @@ const TodoCard = (props) => {
               </button>
             </div>
             <span
+              className={isOverDue(todo.due)}
               onClick={() => {
                 handleEditTodo(todo.id);
               }}
