@@ -235,6 +235,11 @@ h1 {
   font-family: "Inter", sans-serif;
   font-weight: normal;
 }
+.todo-buttons .save-btn {
+  width: 11rem;
+  margin-top: 0.5rem;
+  margin-left: auto;
+}
 
 .input-container {
   display: flex;
