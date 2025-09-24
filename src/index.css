@@ -378,6 +378,7 @@ button.react-datepicker__navigation {
   .todo-content input {
     flex: 1;
     min-width: 0;
+    font-size: 1rem;
   }
 
   .todo-grid {
