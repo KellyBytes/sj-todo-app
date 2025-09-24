@@ -131,23 +131,26 @@ function App() {
     <>
       <ThemeProvider>
         <Header todos={todos} />
-        <div className="grid-container">
+        {/* <div className="grid-container"> */}
+        <div className="container">
           <Tabs
             todos={todos}
             selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}
             toggleSort={toggleSort}
           />
-          <TodoList
-            todos={todos}
-            selectedTab={selectedTab}
-            handleDeleteTodo={handleDeleteTodo}
-            handleCompleteTodo={handleCompleteTodo}
-            handleEditTodo={handleEditTodo}
-            handleSaveEditTodo={handleSaveEditTodo}
-            handleCancelEditTodo={handleCancelEditTodo}
-          />
-          <TodoInput handleAddTodo={handleAddTodo} />
+          <div className="todo-input-container">
+            <TodoList
+              todos={todos}
+              selectedTab={selectedTab}
+              handleDeleteTodo={handleDeleteTodo}
+              handleCompleteTodo={handleCompleteTodo}
+              handleEditTodo={handleEditTodo}
+              handleSaveEditTodo={handleSaveEditTodo}
+              handleCancelEditTodo={handleCancelEditTodo}
+            />
+            <TodoInput handleAddTodo={handleAddTodo} />
+          </div>
         </div>
       </ThemeProvider>
     </>

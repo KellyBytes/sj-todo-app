@@ -12,11 +12,7 @@ const TodoList = (props) => {
       : todos.filter((val) => !val.complete);
 
   return (
-    <div
-      className={`todo-container ${
-        filterTodosList.length === 0 ? 'empty' : ''
-      }`}
-    >
+    <div className="todo-container">
       {filterTodosList.map((todo) => (
         <TodoCard key={todo.id} todo={todo} {...props} />
       ))}
